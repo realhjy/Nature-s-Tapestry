@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传错误</title>
+    <link rel="stylesheet" href="/static/css/UploadError.css" type="text/css"/>
+    <link rel="icon" type="image/png" href="/static/homepageImg/logo/nature2.png">
+</head>
+<body>
+    <div id="container">
+        <header id="header">
+            <div id="logo"><img class="icon" src="/static/homepageImg/logo/nature2.png">&nbsp&nbsp&nbsp&nbsp<em>Nature's Tapestry</em></div>
+            <div class="search">
+                <input type="search" name="" id="" placeholder="Search for more">
+                <button type="button"><a href="https://www.baidu.com/">Search</a></button>
+            </div>
+        </header>
+        <main id="main">
+        <div id="content">
+            <div class="box22">
+                <div class="box221"><h1>文件无效 请返回选择正确文件路径！</h1></div>
+            </div>
+            <div class="box2">
+                <div class="box21">
+                    <img src="/static/homepageImg/pinkmountain.jpg">
+                    <div class="boxtext">
+                        <h2 class="wraptittle">开启交互</h2>
+                        <p><a href="/upload">点击此处上传</a></p>
+                        <p>click here for uploading</p>
+                        <br>
+                        <p><a href="/imageList">查看图片集</a></p>
+                        <p>gallery</p>
+                        <br>
+                        <p><a href="/imageProcessing">处理图像</a></p>
+                        <p>image processing</p>
+                        <br>
+                        <p><a href="/videoList">播放视频</a></p>
+                        <p>video play</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="totopbutton">回到顶部</div>
+</main>
+</div>
+</body>
+<script>
+    window.onload = function()
+    {
+        var t = document.getElementById("totopbutton");
+        var w = document.documentElement.clientWidth || document.body.clientWidth;
+        var h = document.documentElement.clientHeight || document.body.clientHeight;
+        t.style.left = w - t.offsetWidth + "px";
+        t.style.top = h - t.offsetHeight + "px";
+        window.onscroll = function()
+        {
+            var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+            t.style.top = h - t.offsetHeight + scrolltop + "px";
+        }
+        t.onclick = function() {
+            document.documentElement.scrollTop = document.body.scrollTop = 0;
+        }
+    }
+</script>
+</html>

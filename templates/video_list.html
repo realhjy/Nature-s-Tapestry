@@ -1,0 +1,319 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature's Tapestry|Video Collections</title>
+    <link rel="stylesheet" href="/static/css/VideoList.css" type="text/css"/>
+    <link rel="icon" type="image/png" href="/static/homepageImg/logo/nature2.png">
+</head>
+<body>
+<div id="container">
+    <header id="header">
+        <div id="logo"><img class="icon" src="/static/homepageImg/logo/nature2.png">&nbsp&nbsp&nbsp&nbsp<em>Nature's
+            Tapestry</em></div>
+        <div class="search">
+            <form method="post" action="search_video">
+                <input type="text" name="search_name" value="{{search_content}}"
+                       placeholder="输入完整视频名称以快速检索您的视频" class="form-control">
+                <button type="submit">Go</button>
+            </form>
+        </div>
+    </header>
+    <nav id="nav">
+        <div class="navigation">
+            <ul>
+                <li class="navli"><a href="http://127.0.0.1:8000/">首页</a></li>
+                |
+                <li class="navli"><a href="/upload">上传</a></li>
+                |
+                <li class="navli"><a href="/imageList">图片集</a></li>
+                |
+                <li class="navli"><a href="/imageProcessing">图像处理</a></li>
+                |
+                <li class="navli"><a href="/videoList">视频展览</a></li>
+                |
+                <li class="navli"><a href="/audio_play">音频播放</a></li>
+                |
+                <li class="navli"><a href="/ai_assistant">生态助手</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main id="main">
+        <div id="content">
+            <div class="box22">
+                <div class="box221"><h1>Your Video Collections-Click Below to Play</h1></div>
+            </div>
+            <div class="box32">
+                <ul>
+                    {% for video_path in page_obj %}
+                    <li>
+                        <video width="100%" height="740" controls>
+                            <source src="{% static video_path %}" type="video/mp4">
+                        </video>
+                        <p>{{ video }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="pagination">
+                {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+                {% endif %}
+                <span class="current-page">{{ page_obj.number }}</span>
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+                {% endif %}
+            </div>
+            <div id="ai-result-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal-btn">&times;</span>
+            <h2>AI视频解析</h2>
+            <div id="modal-description-content">
+                </div>
+        </div>
+    </div>
+            <div class="box2">
+                <div class="box23">
+                    <p>"Nature's
+                        Tapestry"意为自然是一件由生物多样性编织而成的壮丽艺术品。就像一幅挂毯一样，大自然由各种不同的图案和交织的线索精妙地组成，代表着各种物种和生态系统，每个生物都为其中增添了独特的色彩、质地和节奏，创造出一个充满活力和和谐的杰作。</p>
+                    <p>
+                        大自然的挂毯展示了不同物种之间错综复杂的联系和相互依赖。就像不同的线索汇聚在一起形成美丽的图案一样，大自然中的多样生物相互依赖，在微妙的平衡中生存和繁荣。从最微小的微生物到最宏伟的生物，每一根线索在维系生命的结构中都扮演着至关重要的角色。</p>
+
+                    <p>
+                        当我们欣赏这幅挂毯的美丽时，我们也被提醒要重视保护生物多样性的重要性。每一根线索代表着一个物种，即使失去一根线索也会破坏整个构成。通过保护和培育地球上生命的丰富性，我们不仅能够维护大自然挂毯的错综复杂的图案和微妙的平衡，也能为我们自己和后代确保一个可持续发展和繁荣的未来。</p>
+
+                    <p>
+                        让我们珍惜和庆祝大自然挂毯的美丽，拥抱其中蕴含的多样性和相互联系，使其成为一件真正的杰作。我们制作了您的视频展览，渴望保留下那些维系生命伟大挂毯的宝贵线索。</p>
+                    <p>
+                        "Nature's Tapestry" is a magnificent artwork woven with the threads of biodiversity. Just like a
+                        tapestry, nature is intricately composed of diverse patterns and interwoven threads representing
+                        various species and ecosystems. Each living organism adds its unique hue, texture, and rhythm,
+                        creating a vibrant and harmonious masterpiece.
+                    </p>
+                    <p>
+                        The tapestry of nature showcases the intricate connections and interdependencies among different
+                        species. Just as different threads come together to form a beautiful pattern, the diverse
+                        organisms in nature rely on each other for survival and thrive in a delicate balance. From the
+                        tiniest microorganisms to the grandest creatures, every thread plays a crucial role in
+                        maintaining the fabric of life.
+                    </p>
+                    <p>
+                        As we admire the beauty of this tapestry, we are reminded of the importance of preserving
+                        biodiversity. Each thread represents a species, and the loss of even a single thread can disrupt
+                        the entire composition. By protecting and nurturing the richness of life on Earth, we not only
+                        safeguard the intricate patterns and delicate balance of nature's tapestry but also ensure a
+                        sustainable and thriving future for ourselves and future generations.
+                    </p>
+                    <p>
+                        Let us cherish and celebrate the beauty of nature's tapestry. Through our actions, let us weave
+                        a story of conservation and stewardship, preserving the invaluable threads that sustain life's
+                        grand tapestry.Let us cherish and celebrate the beauty of nature's tapestry, embracing its
+                        diversity and interconnectedness, making it a true masterpiece. We have created your video
+                        exhibition, eager to preserve those precious threads that uphold the greatness of life's
+                        tapestry.
+                    </p>
+                </div>
+                <div class="box21">
+                    <img src="/static/homepageImg/wave.jpg">
+                    <div class="boxtext">
+                        <h2 class="wraptittle">开启交互</h2>
+                        <p><a href="/upload">点击此处上传</a></p>
+                        <p>click here for uploading</p>
+                        <br>
+                        <p><a href="/imageList">查看图片集</a></p>
+                        <p>gallery</p>
+                        <br>
+                        <p><a href="/imageProcessing">处理图像</a></p>
+                        <p>image processing</p>
+                        <br>
+                        <p><a href="/videoList">播放视频</a></p>
+                        <p>video play</p>
+                        <br>
+                        <p><a href="/audio_play">播放音频</a></p>
+                        <p>audio play</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="footer-section">
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <img src="/static/homepageImg/logo/nature2.png">
+                <p class="footer_logo">
+                    &nbsp&nbsp&nbsp
+                    <em>Nature's Tapestry</em>
+                </p>
+            </div>
+            <div class="footer-section">
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp隐私政策
+                    <br>
+                    <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp使用条款
+                    <br>
+                    <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    Copyright © 2025 Nature's Tapestry All rights reserved.</a></p>
+            </div>
+            <div class="footer-section">
+                <h2><em>Contact us</em></h2>
+                <a href="#"><img src="/static/homepageImg/logo/em.PNG" alt="em"></a>
+                <p><a href="">Email</a></p>
+                <a href="#"><img src="/static/homepageImg/logo/fb.PNG" alt="Facebook"></a>
+                <p><a href="#">Facebook</a></p>
+                <a href="#"><img src="/static/homepageImg/logo/x.PNG" alt="x"></a>
+                <p><a href="#">X</a></p>
+                <a href="#"><img src="/static/homepageImg/logo/ins.PNG" alt="Instagram"></a>
+                <p><a href="#">Instagram</a></p>
+            </div>
+        </footer>
+        <div id="totopbutton">回到顶部</div>
+    </main>
+</div>
+</body>
+<script>
+    window.onload = function()
+    {
+        var t = document.getElementById("totopbutton");
+        var w = document.documentElement.clientWidth || document.body.clientWidth;
+        var h = document.documentElement.clientHeight || document.body.clientHeight;
+        t.style.left = w - t.offsetWidth + "px";
+        t.style.top = h - t.offsetHeight + "px";
+        window.onscroll = function()
+        {
+            var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+            t.style.top = h - t.offsetHeight + scrolltop + "px";
+        }
+        t.onclick = function() {
+            document.documentElement.scrollTop = document.body.scrollTop = 0;
+        }
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            $('.box32 video').each(function() {
+                var analyzeButton = $('<button class="ai-analyze-btn">AI解析视频</button>');
+                $(this).after(analyzeButton);
+            });
+
+            var modal = $('#ai-result-modal');
+            var modalContent = $('#modal-description-content');
+            var closeModalBtn = $('.close-modal-btn');
+
+            closeModalBtn.click(function() { modal.hide(); });
+            modal.click(function(event) {
+                if (event.target === this) { $(this).hide(); }
+            });
+
+            $('.box32').on('click', '.ai-analyze-btn', function() {
+                var videoUrl = $(this).prev('video').find('source').attr('src');
+
+                modalContent.html('AI正在截取关键帧并分析视频，这可能需要一点时间，请稍候...');
+                modal.show();
+
+                $.ajax({
+                    url: '/ai_analyze_video/', // 指向之前创建的后端API
+                    type: 'GET',
+                    data: { videoUrl: videoUrl },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.description) {
+                            modalContent.html(data.description.replace(/\n/g, '<br>'));
+                        } else {
+                            modalContent.text('解析出错：' + data.error);
+                        }
+                    },
+                    error: function (xhr) {
+                        var errorMsg = '请求解析服务失败。';
+                        if(xhr.responseJSON && xhr.responseJSON.error) {
+                            errorMsg += ' 原因: ' + xhr.responseJSON.error;
+                        }
+                        modalContent.text(errorMsg);
+                    }
+                });
+            });
+        });
+    </script>
+<style>
+.ai-analyze-btn {
+    align-self: flex-end;
+    margin-top: 10px;
+    margin-right: 5px;
+    padding: 8px 20px;
+    background-color: #2c5d63;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+.ai-analyze-btn:hover {
+    background-color: #3a7a82;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+.ai-analyze-btn:active {
+    background-color: #254d52;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
+}
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modal-content {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.modal-content h2 {
+    text-align: center;
+    color: #2c5d63;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+#modal-description-content {
+    overflow-y: auto;
+    line-height: 1.7;
+    text-align: left;
+}
+.close-modal-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 30px;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+}
+.close-modal-btn:hover {
+    color: #333;
+}
+</style>
+</html>

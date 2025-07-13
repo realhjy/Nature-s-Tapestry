@@ -1,0 +1,161 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature's Tapestry|Audio Play</title>
+    <link rel="stylesheet" href="/static/css/AudioPlay.css" type="text/css"/>
+    <link rel="icon" type="image/png" href="/static/homepageImg/logo/nature2.png">
+</head>
+<body>
+<div id="container">
+    <header id="header">
+        <div id="logo"><img class="icon" src="/static/homepageImg/logo/nature2.png">&nbsp&nbsp&nbsp&nbsp<em>Nature's
+            Tapestry</em></div>
+        <div class="search">
+            <input type="search" name="" id="" placeholder="Search for more">
+            <button type="button"><a href="https://www.baidu.com/">Search</a></button>
+        </div>
+    </header>
+    <nav id="nav">
+        <div class="navigation">
+            <ul>
+                <li class="navli"><a href="http://127.0.0.1:8000/">首页</a></li>
+                |
+                <li class="navli"><a href="/upload">上传</a></li>
+                |
+                <li class="navli"><a href="/imageList">图片集</a></li>
+                |
+                <li class="navli"><a href="/imageProcessing">图像处理</a></li>
+                |
+                <li class="navli"><a href="/videoList">视频展览</a></li>
+                |
+                <li class="navli"><a href="/audio_play">音频播放</a></li>
+                |
+                <li class="navli"><a href="/ai_assistant">生态助手</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main id="main">
+        <div id="content">
+            <div class="box22">
+                <div class="box221"><h1>Click Below to Play the Chirp</h1></div>
+            </div>
+            <div class="box32">
+                <img src="/static/homepageImg/logo/audio.png" class="audio">
+                <p>
+                    <button onclick="playAudio()">播放音频</button>
+                </p>
+                <img src="/static/homepageImg/宽带语谱图2.png" class="boximg">
+                <img src="/static/homepageImg/窄带语谱图2.png" class="boximg">
+            </div>
+            <div class="box2">
+                <div class="box23">
+                    <p>
+                        我们收集了部分鸟类叫声，并利用数字音频处理技术对这段音频进行分析，生成了两种不同类型的语谱图，以更好地理解鸟类的声音特征。</p>
+                    <p>
+                        第一幅是帧大小为64、帧覆盖率为50%的宽带语谱图，它能够呈现出鸟类叫声的整体频谱特征，帮助我们研究它们的声音模式和频率分布。</p>
+                    <p>
+                        第二幅是帧大小为4096、帧覆盖率为50%的窄带语谱图，它能够提供更高分辨率的频谱信息，使我们能够更准确地观察鸟类叫声中的细微变化和频率细节。</p>
+                    <p>
+                        我们希望借助数字音频处理技术，生成并分析语谱图，为人们提供一个更全面、立体的鸟类声音世界，唤起人们对自然环境和生物多样性的保护意识，为保护和维护生物多样性做出贡献，促进人与自然之间的和谐共生。</p>
+                    <p>
+                        We have collected a portion of bird vocalizations and utilized digital audio processing
+                        techniques to analyze the audio, generating two different types of spectrograms to better
+                        understand the sound characteristics of birds.</p>
+                    <p>
+                        The first spectrogram is a wideband spectrogram with a frame size of 64 and a frame overlap rate
+                        of 50%. It showcases the overall spectral features of bird vocalizations, aiding us in studying
+                        their sound patterns and frequency distribution.</p>
+                    <p>
+                        The second spectrogram is a narrowband spectrogram with a frame size of 4096 and a frame overlap
+                        rate of 50%. It provides higher resolution spectral information, allowing us to observe subtle
+                        variations and frequency details within bird vocalizations more accurately.</p>
+                    <p>
+                        By leveraging digital audio processing techniques to generate and analyze spectrograms, we aim
+                        to provide a comprehensive and immersive world of bird sounds. Our goal is to raise awareness
+                        about the importance of protecting the natural environment and biodiversity. Through these
+                        efforts, we strive to contribute to the preservation and maintenance of biodiversity, fostering
+                        a harmonious coexistence between humans and nature.</p>
+                </div>
+                <div class="box21">
+                    <img src="/static/homepageImg/bird.jpg">
+                    <div class="boxtext">
+                        <h2 class="wraptittle">开启交互</h2>
+                        <p><a href="/upload">点击此处上传</a></p>
+                        <p>click here for uploading</p>
+                        <br>
+                        <p><a href="/imageList">查看图片集</a></p>
+                        <p>gallery</p>
+                        <br>
+                        <p><a href="/imageProcessing">处理图像</a></p>
+                        <p>image processing</p>
+                        <br>
+                        <p><a href="/videoList">播放视频</a></p>
+                        <p>video play</p>
+                        <br>
+                        <p><a href="/audio_play">播放音频</a></p>
+                        <p>audio play</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="footer-section">
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <img src="/static/homepageImg/logo/nature2.png">
+                <p class="footer_logo">
+                    &nbsp&nbsp&nbsp
+                    <em>Nature's Tapestry</em>
+                </p>
+            </div>
+            <div class="footer-section">
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp隐私政策
+                    <br>
+                    <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp使用条款
+                    <br>
+                    <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    Copyright © 2025 Nature's Tapestry All rights reserved.</a></p>
+            </div>
+            <div class="footer-section">
+                <h2><em>Contact us</em></h2>
+                <a href="#"><img src="/static/homepageImg/logo/em.PNG" alt="em"></a>
+                <p><a href="">Email</a></p>
+                <a href="#"><img src="/static/homepageImg/logo/fb.PNG" alt="Facebook"></a>
+                <p><a href="#">Facebook</a></p>
+                <a href="#"><img src="/static/homepageImg/logo/x.PNG" alt="x"></a>
+                <p><a href="#">X</a></p>
+                <a href="#"><img src="/static/homepageImg/logo/ins.PNG" alt="Instagram"></a>
+                <p><a href="#">Instagram</a></p>
+            </div>
+        </footer>
+        <div id="totopbutton">回到顶部</div>
+    </main>
+</div>
+</body>
+<script>
+    function playAudio() {
+            var audioFile ='/static/audio/BirdSound.mp3';
+            var audioElement = new Audio(audioFile);
+            audioElement.play();
+        }
+    window.onload = function()
+    {
+        var t = document.getElementById("totopbutton");
+        var w = document.documentElement.clientWidth || document.body.clientWidth;
+        var h = document.documentElement.clientHeight || document.body.clientHeight;
+        t.style.left = w - t.offsetWidth + "px";
+        t.style.top = h - t.offsetHeight + "px";
+        window.onscroll = function()
+        {
+            var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+            t.style.top = h - t.offsetHeight + scrolltop + "px";
+        }
+        t.onclick = function() {
+            document.documentElement.scrollTop = document.body.scrollTop = 0;
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature's Tapestry|上传</title>
+    <link rel="stylesheet" href="/static/css/upload.css" type="text/css"/>
+    <link rel="icon" type="image/png" href="/static/homepageImg/logo/nature2.png">
+</head>
+<body>
+<div id="container">
+    <header id="header">
+        <div id="logo"><img class="icon" src="/static/homepageImg/logo/nature2.png">&nbsp&nbsp&nbsp&nbsp<em>Nature's
+            Tapestry</em></div>
+        <div class="search">
+            <input type="search" name="" id="" placeholder="Search for more">
+            <button type="button"><a href="https://www.baidu.com/">Search</a></button>
+        </div>
+    </header>
+    <nav id="nav">
+        <div class="navigation">
+            <ul>
+                <li class="navli"><a href="http://127.0.0.1:8000/">首页</a></li>
+                |
+                <li class="navli"><a href="/upload">上传</a></li>
+                |
+                <li class="navli"><a href="/imageList">图片集</a></li>
+                |
+                <li class="navli"><a href="/imageProcessing">图像处理</a></li>
+                |
+                <li class="navli"><a href="/videoList">视频展览</a></li>
+                |
+                <li class="navli"><a href="/audio_play">音频播放</a></li>
+                |
+                <li class="navli"><a href="/ai_assistant">生态助手</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main id="main">
+        <div id="content">
+            <div class="box22">
+                <div class="box221"><h1>Have a try</h1></div>
+                <div class="box222"><img src="/static/homepageImg/logo/ph.png"></div>
+                <div class="box221">
+                    <h2>试试上传一张图片</h2>
+                    <form action="upload_image" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label class="custom-file-upload">
+                            <input type="file" name="image" accept="image/*" onchange="showSelectedFile(this)">
+                            选择文件
+                        </label>
+                        <button type="submit">上传图片</button>
+                        <p id="selected-file-info" style="display: none;color: rgba(1,39,44,0.63)"></p>
+                        {% if upload_success %}
+                        <p style="color: rgba(1,39,44,0.63);">上传成功!请点击图片集查看</p>
+                        {% endif %}
+                    </form>
+                </div>
+                <div class="box222"><img src="/static/homepageImg/logo/vi.png"></div>
+                <div class="box221">
+                    <h2>试试上传一个视频</h2>
+                    <form action="upload_video" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label class="custom-file-upload">
+                            <input type="file" name="video" accept="video/*" onchange="showSelectedFile2(this)">
+                            选择文件
+                        </label>
+                        <button type="submit">上传视频</button>
+                        <p id="selected-file-info2" style="display: none;color: rgba(1,39,44,0.63)"></p>
+                        {% if upload_success1 %}
+                        <p style="color: rgba(1,39,44,0.63)">上传成功!请点击视频展览查看</p>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+            <div class="box32">
+                <div class="box321">
+                    <ul>
+                        <li><img src="/static/homepageImg/whale.webp"></li>
+                        <li><img src="/static/homepageImg/wave.webp"></li>
+                        <li><img src="/static/homepageImg/snowmountain.jpg"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box2">
+                <div class="box22">
+                    <p>
+                        我们将对您上传的图像与视频进行处理，您可以生成灰度化图像以及均衡化图像，以获得更好的视觉效果。并且我们将您上传的数据保存至图片集和视频展览中，方便在库中对图像和视频进行查看与定性分析，以更清晰地观察生态中的细节和变化。
+                        我们致力于为您提供一个方便的平台，帮助您更好地理解和研究自然生态。点击下方开启您的交互之旅！</p>
+                    <p>We will process the images and videos you upload and provide the following features: generating
+                        grayscale images and performing image equalization to enhance the visual effect. Additionally,
+                        we will save your uploaded data to our image collection and video exhibition, allowing you to
+                        view and qualitatively analyze them in the library. This will enable you to observe the details
+                        and changes in the ecosystem more clearly.
+                        We are committed to providing you with a convenient platform to better understand and study the
+                        natural ecology. Click below to start your interactive journey! — From Nature's Tapestry
+                    </p></div>
+                <div class="box21">
+                    <img src="/static/homepageImg/wave.jpg">
+                    <div class="boxtext">
+                        <h2 class="wraptittle">开启交互</h2>
+                        <p><a href="/upload">点击此处上传</a></p>
+                        <p>click here for uploading</p>
+                        <br>
+                        <p><a href="/imageList">查看图片集</a></p>
+                        <p>gallery</p>
+                        <br>
+                        <p><a href="/imageProcessing">处理图像</a></p>
+                        <p>image processing</p>
+                        <br>
+                        <p><a href="/videoList">播放视频</a></p>
+                        <p>video play</p>
+                        <br>
+                        <p><a href="/audio_play">播放音频</a></p>
+                        <p>audio play</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="footer-section">
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <img src="/static/homepageImg/logo/nature2.png">
+                <p class="footer_logo">
+                    &nbsp&nbsp&nbsp
+                    <em>Nature's Tapestry</em>
+                </p>
+            </div>
+            <div class="footer-section">
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp隐私政策
+                    <br>
+                    <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp使用条款
+                    <br>
+                    <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    Copyright © 2025 Nature's Tapestry All rights reserved.</a></p>
+            </div>
+            <div class="footer-section">
+                <h2><em>Contact us</em></h2>
+                <a href="#"><img src="/static/homepageImg/logo/em.PNG" alt="em"></a>
+                <p><a href="">Email</a></p>
+                <a href="#"><img src="/static/homepageImg/logo/fb.PNG" alt="Facebook"></a>
+                <p><a href="#">Facebook</a></p>
+                <a href="#"><img src="/static/homepageImg/logo/x.PNG" alt="x"></a>
+                <p><a href="#">X</a></p>
+                <a href="#"><img src="/static/homepageImg/logo/ins.PNG" alt="Instagram"></a>
+                <p><a href="#">Instagram</a></p>
+            </div>
+        </footer>
+        <div id="totopbutton">回到顶部</div>
+    </main>
+</div>
+</body>
+<script>
+    function showSelectedFile(input) {
+        if (input.files && input.files[0]) {
+            var selectedFile = input.files[0];
+            var fileInfo = "已选择文件：" + selectedFile.name;
+            document.getElementById("selected-file-info").innerHTML = fileInfo;
+            document.getElementById("selected-file-info").style.display = "block";
+        }
+    }
+    function showSelectedFile2(input) {
+        if (input.files && input.files[0]) {
+            var selectedFile = input.files[0];
+            var fileInfo = "已选择文件：" + selectedFile.name;
+            document.getElementById("selected-file-info2").innerHTML = fileInfo;
+            document.getElementById("selected-file-info2").style.display = "block";
+        }
+    }
+
+    window.onload = function()
+    {
+        var t = document.getElementById("totopbutton");
+        var w = document.documentElement.clientWidth || document.body.clientWidth;
+        var h = document.documentElement.clientHeight || document.body.clientHeight;
+        t.style.left = w - t.offsetWidth + "px";
+        t.style.top = h - t.offsetHeight + "px";
+        window.onscroll = function()
+        {
+            var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+            t.style.top = h - t.offsetHeight + scrolltop + "px";
+        }
+        t.onclick = function() {
+            document.documentElement.scrollTop = document.body.scrollTop = 0;
+        }
+    }
+</script>
+</html>

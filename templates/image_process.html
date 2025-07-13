@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature's Tapestry|图像处理</title>
+    <link rel="stylesheet" href="/static/css/ImageProcess.css" type="text/css"/>
+    <link rel="icon" type="image/png" href="/static/homepageImg/logo/nature2.png">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+<div id="container">
+    <header id="header">
+        <div id="logo"><img class="icon" src="/static/homepageImg/logo/nature2.png">&nbsp&nbsp&nbsp&nbsp<em>Nature's
+            Tapestry</em></div>
+        <div class="search">
+            <input type="search" name="" id="" placeholder="Search for more">
+            <button type="button"><a href="https://www.baidu.com/">Search</a></button>
+        </div>
+    </header>
+    <nav id="nav">
+        <div class="navigation">
+            <ul>
+                <li class="navli"><a href="http://127.0.0.1:8000/">首页</a></li>
+                |
+                <li class="navli"><a href="/upload">上传</a></li>
+                |
+                <li class="navli"><a href="/imageList">图片集</a></li>
+                |
+                <li class="navli"><a href="/imageProcessing">图像处理</a></li>
+                |
+                <li class="navli"><a href="/videoList">视频展览</a></li>
+                |
+                <li class="navli"><a href="/audio_play">音频播放</a></li>
+                |
+                <li class="navli"><a href="/ai_assistant">生态助手</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="image-container">
+        <div id="original-images"></div>
+        <div id="processed-images"></div>
+    </div>
+    <div id="pagination"></div>
+    <h1>请点击下方加载图像</h1>
+    <button onclick="loadImages()" class="button">加载图像</button>
+
+    <div class="box21">
+        <div class="boxtext">
+            <h2 class="wraptittle">开启交互</h2>
+            <p><a href="/upload">点击此处上传</a></p>
+            <p>click here for uploading</p>
+            <br>
+            <p><a href="/imageList">查看图片集</a></p>
+            <p>gallery</p>
+            <br>
+            <p><a href="/imageProcessing">处理图像</a></p>
+            <p>image processing</p>
+            <br>
+            <p><a href="/videoList">播放视频</a></p>
+            <p>video play</p>
+            <br>
+            <p><a href="/audio_play">播放音频</a></p>
+            <p>audio play</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-section">
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <img src="/static/homepageImg/logo/nature2.png">
+            <p class="footer_logo">
+                &nbsp&nbsp&nbsp
+                <em>Nature's Tapestry</em>
+            </p>
+        </div>
+        <div class="footer-section">
+            <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp隐私政策
+                <br>
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp使用条款
+                <br>
+                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                Copyright © 2025 Nature's Tapestry All rights reserved.</a></p>
+        </div>
+        <div class="footer-section">
+            <h2><em>Contact us</em></h2>
+            <a href="#"><img src="/static/homepageImg/logo/em.PNG" alt="em"></a>
+            <p><a href="">Email</a></p>
+            <a href="#"><img src="/static/homepageImg/logo/fb.PNG" alt="Facebook"></a>
+            <p><a href="#">Facebook</a></p>
+            <a href="#"><img src="/static/homepageImg/logo/x.PNG" alt="x"></a>
+            <p><a href="#">X</a></p>
+            <a href="#"><img src="/static/homepageImg/logo/ins.PNG" alt="Instagram"></a>
+            <p><a href="#">Instagram</a></p>
+        </div>
+    </footer>
+    <div id="totopbutton">回到顶部</div>
+</div>
+</body>
+
+<style>
+    .result-wrapper {
+    position: relative;
+    margin-top: 15px;
+    padding: 5px;
+    border: 1px solid #e0e7e7;
+    border-radius: 8px;
+    background-color: #f7f9fa;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 24px;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+    font-weight: bold;
+    z-index: 10;
+}
+.close-btn:hover {
+    color: #333;
+}
+</style>
+
+<script>
+    var currentPage = 1;
+        var imagesPerPage = 3;
+        var totalPages = 0;
+        var imageUrls = [];
+
+        function loadImages() {
+            $.ajax({
+                url: 'load_images',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    imageUrls = data.image_urls;
+                    totalPages = Math.ceil(imageUrls.length / imagesPerPage);
+                    showImages();
+                    showPagination();
+                },
+                error: function (error) {
+                    console.log('Error loading images:', error);
+                }
+            });
+        }
+
+        function showImages() {
+            var originalImagesContainer = $('#original-images');
+            var processedImagesContainer = $('#processed-images');
+            originalImagesContainer.empty();
+            processedImagesContainer.empty();
+
+            var startIndex = (currentPage - 1) * imagesPerPage;
+            var endIndex = startIndex + imagesPerPage;
+            var currentImageUrls = imageUrls.slice(startIndex, endIndex);
+
+            currentImageUrls.forEach(function (imageUrl) {
+                var imageWrapper = $('<div class="image-wrapper">');
+                var originalImage = $('<img>');
+                originalImage.attr('src', imageUrl);
+                // originalImage.attr('width', '200');
+                // originalImage.attr('height', '100');
+                imageWrapper.append(originalImage);
+
+                var grayscaleButton = $('<button>');
+                grayscaleButton.text('灰度化');
+                grayscaleButton.click(function () {
+                    grayscaleImage(imageUrl, imageWrapper);
+                });
+                imageWrapper.append(grayscaleButton);
+
+                var equalizeButton = $('<button>');
+                equalizeButton.text('均衡化');
+                equalizeButton.click(function () {
+                    equalizeImage(imageUrl, imageWrapper);
+                });
+                imageWrapper.append(equalizeButton);
+
+                var recognizeButton = $('<button>');
+                recognizeButton.text('AI识别');
+                recognizeButton.click(function () {
+                recognizeImage(imageUrl, imageWrapper);
+                });
+
+                imageWrapper.append(recognizeButton);
+
+                originalImagesContainer.append(imageWrapper);
+            });
+        }
+
+        function showPagination() {
+            var paginationContainer = $('#pagination');
+            paginationContainer.empty();
+
+            for (var i = 1; i <= totalPages; i++) {
+                var pageButton = $('<button>');
+                pageButton.text(i);
+                pageButton.click(function () {
+                    currentPage = parseInt($(this).text());
+                    showImages();
+                });
+                paginationContainer.append(pageButton);
+            }
+        }
+
+        function grayscaleImage(imageUrl, imageWrapper) {
+            var myData = {
+                key1: imageUrl,
+            };
+            $.ajax({
+                url: 'grayscale_image',
+                type: 'GET',
+                data: myData,
+                dataType: 'json',
+                success: function (data) {
+<!--                    var grayscaleImage = $('<img>');-->
+<!--                    grayscaleImage.attr('src', data.grayscale_image_url);-->
+<!--                    // grayscaleImage.attr('width', '200');-->
+<!--                    // grayscaleImage.attr('height', '100');-->
+
+                    imageWrapper.find('.grayscale-image').remove();
+                    imageWrapper.append(grayscaleImage);
+
+                    var resultWrapper = $('<div class="result-wrapper grayscale-result">');
+                    var closeButton = $('<span class="close-btn">&times;</span>').click(function() {
+                    $(this).parent().remove(); // 点击时删除整个包装盒
+                    });
+
+                    var grayscaleImage = $('<img>').attr('src', data.grayscale_image_url);
+                    resultWrapper.append(closeButton).append(grayscaleImage);
+                    imageWrapper.append(resultWrapper);
+                    },
+
+                    error: function (error) {
+                    console.log('Error processing grayscale image:', error);
+                    }
+                    });
+                    }
+
+        function equalizeImage(imageUrl, imageWrapper) {
+            var myData = {
+                key1: imageUrl,
+            };
+            $.ajax({
+                url: 'equalize_image',
+                type: 'GET',
+                data: myData,
+                dataType: 'json',
+                success: function (data) {
+<!--                    var equalizedImage = $('<img>');-->
+<!--                    equalizedImage.attr('src', data.equalized_image_url);-->
+<!--                    // equalizedImage.attr('width', '200');-->
+<!--                    // equalizedImage.attr('height', '100');-->
+
+                    imageWrapper.find('.equalized-image').remove();
+                    imageWrapper.append(equalizedImage);
+
+                    var resultWrapper = $('<div class="result-wrapper equalize-result">');
+                    var closeButton = $('<span class="close-btn">&times;</span>').click(function() {
+                    $(this).parent().remove();
+                    });
+
+                    var equalizedImage = $('<img>').attr('src', data.equalized_image_url);
+                    resultWrapper.append(closeButton).append(equalizedImage);
+                    imageWrapper.append(resultWrapper);
+                    },
+                error: function (error) {
+                    console.log('Error processing equalized image:', error);
+                }
+            });
+        }
+
+        function recognizeImage(imageUrl, imageWrapper)
+        {
+<!--    // 显示一个等待提示-->
+<!--    var resultDiv = imageWrapper.find('.ai-description');-->
+<!--    if (resultDiv.length === 0) {-->
+<!--        resultDiv = $('<div class="ai-description">');-->
+<!--        imageWrapper.append(resultDiv);-->
+<!--    }-->
+<!--    resultDiv.text('AI正在分析图片，请稍候...');-->
+
+    imageWrapper.find('.ai-result').remove();
+    var resultWrapper = $('<div class="result-wrapper ai-result">');
+    var closeButton = $('<span class="close-btn">&times;</span>').click(function() {
+        $(this).parent().remove();
+    });
+    var resultDiv = $('<div class="ai-description">').text('AI正在分析图片，请稍候...');
+
+    resultWrapper.append(closeButton).append(resultDiv);
+    imageWrapper.append(resultWrapper);
+
+    $.ajax({
+        url: 'ai_recognize_image',
+        type: 'GET',
+        data: {
+            imageUrl: imageUrl // 将图片的URL传给后端
+        },
+        dataType: 'json',
+        success: function (data) {
+            if (data.description) {
+                resultDiv.html(data.description.replace(/\n/g, '<br>'));
+            } else {
+                resultDiv.text('识别出错：' + data.error);
+            }
+        },
+        error: function (error) {
+            console.log('Error recognizing image:', error);
+            resultDiv.text('请求识别服务失败。');
+        }
+    });
+}
+
+    window.onload = function()
+    {
+        var t = document.getElementById("totopbutton");
+        var w = document.documentElement.clientWidth || document.body.clientWidth;
+        var h = document.documentElement.clientHeight || document.body.clientHeight;
+        t.style.left = w - t.offsetWidth + "px";
+        t.style.top = h - t.offsetHeight + "px";
+        window.onscroll = function()
+        {
+            var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+            t.style.top = h - t.offsetHeight + scrolltop + "px";
+        }
+        t.onclick = function() {
+            document.documentElement.scrollTop = document.body.scrollTop = 0;
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature's Tapestry | AI生态助手</title>
+    <link rel="stylesheet" href="/static/css/ai_assistant.css" type="text/css"/>
+    <link rel="icon" type="image/png" href="/static/homepageImg/logo/nature2.png">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+<div id="container">
+    <header id="header">
+        <div id="logo"><img class="icon" src="/static/homepageImg/logo/nature2.png">&nbsp;&nbsp;&nbsp;&nbsp;<em>Nature's
+            Tapestry</em></div>
+        <div class="search"><input type="search" placeholder="Search for more">
+            <button type="button">Search</button>
+        </div>
+    </header>
+
+    <nav id="nav">
+        <div class="navigation">
+            <ul>
+                <li class="navli"><a href="/">首页</a></li>
+                |
+                <li class="navli"><a href="/upload">上传</a></li>
+                |
+                <li class="navli"><a href="/imageList">图片集</a></li>
+                |
+                <li class="navli"><a href="/imageProcessing">图像处理</a></li>
+                |
+                <li class="navli"><a href="/videoList">视频展览</a></li>
+                |
+                <li class="navli"><a href="/audio_play">音频播放</a></li>
+                |
+                <li class="navli"><a href="/ai_assistant">生态助手</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="main">
+        <div class="ai-chat-layout">
+            <aside class="chat-sidebar">
+                <div class="new-chat-btn" id="new-chat-btn">+ 开启新对话</div>
+                <div class="chat-history">
+                    <h4>历史对话</h4>
+                    <ul id="history-list"></ul>
+                </div>
+            </aside>
+            <main class="chat-main">
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message ai-message">你好！我是你的生态知识伙伴，有什么想问的吗？</div>
+                </div>
+                <div class="chat-input-area">
+                    <form id="chat-form">
+                        <textarea id="question-input" placeholder="在这里输入你的问题..." rows="1"></textarea>
+                        <button type="submit" id="send-button">发送</button>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </main>
+
+    <footer id="footer">
+    </footer>
+</div>
+
+<script>
+    const chatForm = document.getElementById('chat-form');
+    const questionInput = document.getElementById('question-input');
+    const sendButton = document.getElementById('send-button');
+    const chatMessages = document.getElementById('chat-messages');
+    const newChatButton = document.getElementById('new-chat-btn');
+    const historyList = document.getElementById('history-list');
+
+    let chatHistory = {}; // 存储所有对话
+    let activeChatId = null; // 当前正在进行的对话ID
+
+    //渲染所有历史记录到左侧
+    function renderHistoryList() {
+        historyList.innerHTML = '';
+
+        const chatIds = Object.keys(chatHistory);
+
+        chatIds.forEach(chatId => {
+
+            const session = chatHistory[chatId];
+            const listItem = document.createElement('li');
+            listItem.dataset.chatId = chatId;
+
+            const titleSpan = document.createElement('span');
+            titleSpan.className = 'history-title';
+            titleSpan.textContent = session.title;
+
+            const deleteBtn = document.createElement('span');
+            deleteBtn.className = 'delete-chat-btn';
+            deleteBtn.textContent = '×';
+
+            deleteBtn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                deleteChatSession(chatId);
+            });
+
+            listItem.appendChild(titleSpan);
+            listItem.appendChild(deleteBtn);
+
+            if (chatId === activeChatId) {
+                listItem.style.backgroundColor = '#e0e7e7';
+                listItem.style.fontWeight = 'bold';
+            }
+            listItem.addEventListener('click', () => {
+                loadChatSession(chatId);
+            });
+            historyList.appendChild(listItem);
+        });
+    }
+
+    //删除对话
+    function deleteChatSession(chatId) {
+        if (!confirm(`你确定要删除对话“${chatHistory[chatId].title}”吗？`)) {
+            return;
+        }
+
+        const wasActive = (activeChatId === chatId);
+
+        delete chatHistory[chatId];
+        saveHistoryToStorage();
+
+        if (wasActive) {
+            // 如果删除的是当前对话
+            const remainingIds = Object.keys(chatHistory);
+            if (remainingIds.length > 0) {
+                // 如果还有其他对话，就自动加载第一个
+                loadChatSession(remainingIds[0]);
+            } else {
+                // 如果这是最后一个对话，删完后列表空了，才创建新的
+                createNewChat();
+            }
+        } else {
+            // 如果删除的不是当前对话，当前对话不受影响，重新渲染列表
+            renderHistoryList();
+        }
+    }
+
+    function loadHistoryAndInitialize() {
+        const savedHistory = localStorage.getItem('chatHistory');
+        chatHistory = savedHistory ? JSON.parse(savedHistory) : {};
+
+        renderHistoryList(); // 渲染左侧列表
+
+        const savedActiveId = localStorage.getItem('activeChatId');
+        if (savedActiveId && chatHistory[savedActiveId]) {
+            loadChatSession(savedActiveId);
+        } else if (Object.keys(chatHistory).length > 0) {
+            // 如果没有活动的对话，但有历史记录，则加载第一条
+            loadChatSession(Object.keys(chatHistory)[0]);
+        } else {
+            // 如果完全没有历史，就开启一个新对话
+            createNewChat();
+        }
+    }
+
+    //加载某段对话
+    function loadChatSession(chatId) {
+        activeChatId = chatId;
+        localStorage.setItem('activeChatId', activeChatId);
+
+        chatMessages.innerHTML = ''; // 清空聊天窗口
+        const session = chatHistory[activeChatId];
+        if(session && session.messages){
+            session.messages.forEach(msg => {
+                appendMessage(msg.text, msg.sender, false); // 加载历史时不需要重复保存
+            });
+        }
+
+        renderHistoryList(); // 重新渲染列表
+    }
+
+    //创建新对话
+    function createNewChat() {
+        const newChatId = 'chat-' + Date.now();
+        chatHistory[newChatId] = {
+            title: '新的对话', // 临时标题
+            messages: [{
+                text: '你好！我是你的生态知识伙伴，有什么想问的吗？',
+                sender: 'ai'
+            }]
+        };
+        activeChatId = newChatId;
+        loadChatSession(newChatId); // 加载这个新对话的界面
+        saveHistoryToStorage(); // 保存到浏览器
+    }
+
+    function saveHistoryToStorage() {
+        localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+    }
+
+    /**
+     * 向聊天窗口添加一条消息气泡
+     * @param {string} text - 消息内容
+     * @param {string} sender - 发送者 ('user' 或 'ai')
+     * @param {boolean} shouldSave - 是否需要保存这条消息
+     * @returns {HTMLElement} - 创建的消息元素
+     */
+    function appendMessage(text, sender, shouldSave = true) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message', sender + '-message');
+        messageElement.innerHTML = marked.parse(text || ''); // 使用marked解析，并处理空文本
+        chatMessages.appendChild(messageElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        if (shouldSave && activeChatId) {
+            // 保存这条新消息到当前对话中
+            chatHistory[activeChatId].messages.push({ text, sender });
+            saveHistoryToStorage();
+        }
+        return messageElement;
+    }
+
+    // 页面加载时，自动执行初始化
+    window.addEventListener('load', loadHistoryAndInitialize);
+
+    // “开启新对话”按钮的点击事件
+    newChatButton.addEventListener('click', createNewChat);
+
+    // 表单提交的事件
+    chatForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const question = questionInput.value.trim();
+        if (!question) return;
+
+        // 如果是新对话的第一句，用它作为标题
+        if (chatHistory[activeChatId] && chatHistory[activeChatId].messages.length <= 1) {
+            chatHistory[activeChatId].title = question.substring(0, 20) + (question.length > 20 ? '...' : '');
+            renderHistoryList(); // 更新侧边栏标题
+        }
+        appendMessage(question, 'user');
+        questionInput.value = '';
+
+        sendButton.disabled = true;
+        sendButton.innerText = 'AI正在输出...';
+
+        // 为AI的回答创建一个空的消息气泡
+        const aiMessageElement = appendMessage('...', 'ai', false); // AI的回答先不保存
+        let fullAnswer = '';
+
+        // 流式输出
+        fetch('api/ask-baidu-stream/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ question: question })
+        })
+        .then(response => {
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder('utf-8');
+
+            function read() {
+                reader.read().then(({ done, value }) => {
+                    if (done) {
+                        // 流结束后，把完整的AI回答作为一个整体保存起来
+                        chatHistory[activeChatId].messages.push({ text: fullAnswer, sender: 'ai' });
+                        saveHistoryToStorage();
+                        sendButton.disabled = false;
+                        sendButton.innerText = '发送';
+                        return;
+                    }
+
+                    const chunk = decoder.decode(value, {stream: true});
+                    const lines = chunk.split('\n');
+                    lines.forEach(line => {
+                        if (line.startsWith('data:')) {
+                            const jsonStr = line.substring(5).trim();
+                            if (!jsonStr) return;
+                            try {
+                                const data = JSON.parse(jsonStr);
+                                if (data.result) {
+                                    if (fullAnswer === '...') fullAnswer = ''; // 清除初始的等待符
+                                    fullAnswer += data.result;
+                                    aiMessageElement.innerHTML = marked.parse(fullAnswer);
+                                }
+                            } catch (e) {  }
+                        }
+                    });
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    read();
+                });
+            }
+            read();
+        })
+        .catch(error => {
+            aiMessageElement.innerText = "请求失败: " + error.message;
+            sendButton.disabled = false;
+            sendButton.innerText = '发送';
+        });
+    });
+</script>
+</body>
+</html>

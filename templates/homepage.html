@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature's Tapestry|首页</title>
+    <link rel="stylesheet" href="/static/css/homepage.css" type="text/css"/>
+    <link rel="icon" type="image/png" href="/static/homepageImg/logo/nature2.png">
+</head>
+<body>
+    <div id="container">
+        <header id="header">
+            <div id="logo"><img class="icon" src="/static/homepageImg/logo/nature2.png">&nbsp&nbsp&nbsp&nbsp<em>Nature's Tapestry</em></div>
+            <div class="search">
+                <input type="search" name="" id="" placeholder="Search for more">
+                <button type="button"><a href="https://www.baidu.com/">Search</a></button>
+            </div>
+        </header>
+        <nav id="nav">
+        <div class="navigation">
+            <ul>
+                <li class="navli"><a href="http://127.0.0.1:8000/">首页</a></li>|
+                <li class="navli"><a href="/upload">上传</a></li>|
+                <li class="navli"><a href="/imageList">图片集</a></li>|
+                <li class="navli"><a href="/imageProcessing">图像处理</a></li>|
+                <li class="navli"><a href="/videoList">视频展览</a></li>|
+                <li class="navli"><a href="/audio_play">音频播放</a></li>|
+                <li class="navli"><a href="/ai_assistant">生态助手</a></li>
+            </ul>
+        </div>
+            <div class="navimg">
+                <img class="img-slide img2" src="/static/homepageImg/1.jpg">
+                <img class="img-slide img2" src="/static/homepageImg/2.jpg">
+                <img class="img-slide img2" src="/static/homepageImg/3.jpg">
+                <img class="img-slide img2" src="/static/homepageImg/4.jpg">
+                <h2 id="navtittle" onclick="show()">
+                     "Nature's Tapestry"——自然是一幅织物，生物多样性是其中的重要线索与图案的交织
+                </h2>
+            </div>
+        </nav>
+        <main id="main">
+        <div id="content">
+            <div class="box1">
+                <div class="box11rotate">
+                    <img src="/static/homepageImg/deepforest.jpg" class="image">
+                    <img src="/static/homepageImg/mountain.jpg" class="image">
+                </div>
+                <div class="box12">
+                    <p class="boxtittle">陆地生态系统</p>
+                </br>
+                     <p><a href="https://baike.baidu.com/item/%E9%99%86%E5%9C%B0%E7%94%9F%E6%80%81%E7%B3%BB%E7%BB%9F/1875247">陆地生态系统(terrestrial ecosystem)</a>占地球表面积的1/3，它是为人类提供了居住环境以及食物和衣着的主体部分，是地球上最重要的生态系统类型。</p>
+                    <p>陆地的生态环境复杂多变，生物群落的种类也很多，两者的相互结合从气候炎热的赤道到气候严寒的两极，从气候湿润的近海地区到大陆腹地的干旱荒漠，形成了多种多样的陆地生态系统。</p>
+                    <p>陆地生态系统的分化与分布受多种因素的影响，其中起主导作用的是海陆分布和由于各地太阳高度角的差异所导致的太阳辐射量和季节变化，以及与太阳辐射量相联系的水热状况。水热条件变化的主导因素包括纬度，经度和海拔高度等。</p>
+                </div>
+            </div>
+            <div class="box1">
+                <div class="box11rotate">
+                    <img src="/static/homepageImg/flamingo.jpg" class="image">
+                    <img src="/static/homepageImg/sea.jpg" class="image">
+                </div>
+                <div class="box12">
+                    <p class="boxtittle">水域生态系统</p>
+                </br>
+                    <p><a href="https://baike.baidu.com/item/%E6%B0%B4%E5%9F%9F%E7%94%9F%E6%80%81%E7%B3%BB%E7%BB%9F?fromModule=lemma_search-box">水域生态系统(aquatic ecosystem)</a>，是指在一定的空间和时间范围内，水域环境中栖息的各种生物和它们周围的自然环境所共同构成的基本功能单位</p>
+                    <p>它的时空范围有大有小，大到海洋，小到一口池塘、一个鱼缸，都是一个水域生态系统。按照水域环境的具体特征，水域生态系统可以划分为淡水生态系统和海洋生态系统。淡水生态系统又可以进一步划分为流水生态系统和静水生态系统，前者包括江河、溪流和水渠等，后者包括湖泊、池塘和水库等。海洋生态系统又可以进一步划分为潮间带生态系统、浅海生态系统、深海大洋生态系统。</p>
+                </div>
+            </div>
+            <div class="box1">
+                <div class="box11rotate">
+                    <img src="/static/homepageImg/park.jpg" class="image">
+                    <img src="/static/homepageImg/park2.jpg" class="image">
+                </div>
+                <div class="box12">
+                    <p class="boxtittle">人工生态系统</p>
+                </br>
+                <p><a href="https://baike.baidu.com/item/%E4%BA%BA%E5%B7%A5%E7%94%9F%E6%80%81%E7%B3%BB%E7%BB%9F?fromModule=lemma_search-box">人工生态系统(artificial ecosystem)</a>，是指经过人类干预和改造后形成的生态系统。</p>
+                    <p>它决定于人类活动、自然生态和社会经济条件的良性循环。人类对于自然生态的作用，主要表现在人类对自然的开发、改造上。农业生产就不仅改变了动植物的品种和习性，也引起气候、地貌等的变化。自然生态对人类的影响是多方面的，衣、食、住、行无所不及。不同的社会制度、生产关系和生产力水平，制约着人的活动能力和对自然资源的利用方式，从而也深刻影响着人类活动与自然条件。</p>
+                </div>
+            </div>
+            <div class="box2">
+                <div class="box22">
+                    <p>生态系统多样性是维持生物多样性的重要要素之一，而生态系统又可分为陆地生态系统、水域生态系统和人工生态系统。我们应该重视保护生态系统，以维护生物多样性。然而，如今环境污染问题日益严重，我们必须高度重视并采取行动，以减少污染对生态系统的破坏，保护地球的生态平衡。我们的网站通过数字媒体基础技术，实现对图像、音频与视频等媒体的交互，希望帮助更多人了解自然、贴近自然、保护自然。
+<p>Ecosystem diversity is an essential component of biodiversity, and ecosystems can be classified into three major categories. We must protect ecosystems to safeguard biodiversity. However, environmental pollution is increasingly severe nowadays, and we should pay more attention to it. We must prioritize taking action to reduce pollution and protect the ecological balance of our planet. "Nature's tapestry" utilizes digital media foundation technologies to enable interaction with images, audio, and video, with the aim of helping more people understand, connect with, and preserve nature.</p></div>
+                <div class="box21">
+                    <img src="/static/homepageImg/snowmountain.jpg">
+                    <div class="boxtext">
+                        <h2 class="wraptittle">开启交互</h2>
+                        <p><a href="/upload">点击此处上传</a></p>
+                        <p>click here for uploading</p>
+                        <br>
+                        <p><a href="/imageList">查看图片集</a></p>
+                        <p>gallery</p>
+                        <br>
+                        <p><a href="/imageProcessing">处理图像</a></p>
+                        <p>image processing</p>
+                        <br>
+                        <p><a href="/videoList">播放视频</a></p>
+                        <p>video play</p>
+                    </div>
+                </div>
+            </div>
+            <div class="div-item">
+                <div class="div1">
+                    <h2 class="h21">
+                        <a href="https://www.gov.cn/yaowen/liebiao/202307/content_6892793.htm">要闻</a>
+                    </h2>
+                </div>
+                <div class="div2">
+                    <a href="https://www.gov.cn/yaowen/liebiao/202307/content_6892793.htm">
+                        <div class="div21">
+                            <img src="/static/homepageImg/fog.jpg">
+                            <h3 class="h31">环保的重要性</h3>
+                        </div>
+                    </a>
+                </div>
+                <ul class="ul1">
+                    <li>
+                        <a href="https://www.gov.cn/yaowen/liebiao/202307/content_6892793.htm">人与自然和谐共生</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="div-item">
+                <div class="div1">
+                    <h2 class="h21">
+                        <a href="https://www.thepaper.cn/newsDetail_forward_24591647">聚焦</a>
+                    </h2>
+                </div>
+                <div class="div2">
+                    <a href="https://www.thepaper.cn/newsDetail_forward_24591647">
+                        <div class="div21">
+                            <img src="/static/homepageImg/icecracks.jpg">
+                            <h3 class="h31">“地球之殇”</h3>
+                        </div>
+                    </a>
+                </div>
+                <ul class="ul1">
+                    <li>
+                        <a href="https://www.thepaper.cn/newsDetail_forward_24591647">日本核污水排海</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="div-item">
+                <div class="div1">
+                    <h2 class="h21">
+                        <a href="https://baike.baidu.com/item/%E7%94%9F%E7%89%A9%E5%A4%9A%E6%A0%B7%E6%80%A7%E5%85%AC%E7%BA%A6/1529928">科普</a>
+                    </h2>
+                </div>
+                <div class="div2">
+                    <a href="https://baike.baidu.com/item/%E7%94%9F%E7%89%A9%E5%A4%9A%E6%A0%B7%E6%80%A7%E5%85%AC%E7%BA%A6/1529928">
+                        <div class="div21">
+                            <img src="/static/homepageImg/horse.jpg">
+                            <h3 class="h31">生物多样性公约</h3>
+                        </div>
+                    </a>
+                </div>
+                <ul class="ul1">
+                    <li>
+                        <a href="https://baike.baidu.com/item/%E7%94%9F%E7%89%A9%E5%A4%9A%E6%A0%B7%E6%80%A7%E5%85%AC%E7%BA%A6/1529928">生物多样性公约-更多</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    <footer>
+    <div class="footer-section">
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <img class="icon" src="/static/homepageImg/logo/nature2.png">
+      <p class="footer_logo">
+          &nbsp&nbsp&nbsp
+          <em>Nature's Tapestry</em>
+      </p>
+    </div>
+    <div class="footer-section">
+      <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp隐私政策
+          <br>
+          <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp使用条款
+          <br>
+          <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          Copyright © 2025 Nature's Tapestry All rights reserved.</a></p>
+    </div>
+    <div class="footer-section">
+        <h2><em>Contact us</em></h2>
+      <a href="#"><img src="/static/homepageImg/logo/em.PNG" alt="em"></a>
+      <p><a href="">Email</a></p>
+      <a href="#"><img src="/static/homepageImg/logo/fb.PNG" alt="Facebook"></a>
+      <p><a href="#">Facebook</a></p>
+      <a href="#"><img src="/static/homepageImg/logo/x.PNG" alt="x"></a>
+      <p><a href="#">X</a></p>
+      <a href="#"><img src="/static/homepageImg/logo/ins.PNG" alt="Instagram"></a>
+      <p><a href="#">Instagram</a></p>
+    </div>
+  </footer>
+        <div id="totopbutton">回到顶部</div>
+</main>
+</div>
+</body>
+<script>
+    var i=0;
+    function ChangeImg()
+    {
+        i++;
+        var a=document.getElementsByClassName("img-slide");
+        if(i>=a.length)
+        i=0;
+        for(var j=0;j<a.length;j++)
+        {
+            a[j].style.display='none';
+        }
+        a[i].style.display='block';
+    }
+    setInterval(ChangeImg,2500);//设置定时器
+    function show()
+        {
+            document.getElementById("navtittle").innerHTML="持续关注——保护生物多样性——人与自然和谐共生——我们在行动——加入我们——了解更多";
+        }
+    window.onload = function()
+    {
+        var t = document.getElementById("totopbutton");
+        var w = document.documentElement.clientWidth || document.body.clientWidth;
+        var h = document.documentElement.clientHeight || document.body.clientHeight;
+        t.style.left = w - t.offsetWidth + "px";
+        t.style.top = h - t.offsetHeight + "px";
+        window.onscroll = function()
+        {
+            var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+            t.style.top = h - t.offsetHeight + scrolltop + "px";
+        }
+        t.onclick = function() {
+            document.documentElement.scrollTop = document.body.scrollTop = 0;
+        }
+    }
+</script>
+</html>
